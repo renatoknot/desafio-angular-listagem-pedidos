@@ -1,1 +1,15 @@
-<h1>Meus Pedidos</h1>
+<div class="container">
+  <h1>Lista de Pedidos</h1>
+
+  <ul class="order-list">
+    @for (pedido of pedidos; track pedido.id) {
+    <li class="order-item">
+      <span>ID do Pedido: {{ pedido.id }}</span>
+      <span>Cliente: {{ pedido.client.name }}</span>
+      <span>Data: {{ pedido.date }}</span>
+      <span>Valor: {{ pedido.value }}</span>
+    </li>
+    }
+  </ul>
+
+</div>
