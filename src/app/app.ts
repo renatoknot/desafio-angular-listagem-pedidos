@@ -2,6 +2,7 @@
 
 import { Component, OnInit } from '@angular/core'; // 1. Adicione OnInit
 import { RouterOutlet } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
 
 import { Pedido } from './models/pedido.model'; // 3. Importe nosso modelo
 import { PedidoService } from './services/pedido'; // 4. Importe nosso serviço
@@ -10,7 +11,7 @@ import { PedidoService } from './services/pedido'; // 4. Importe nosso serviço
   selector: 'app-root',
   standalone: true,
 
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, MatCardModule],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

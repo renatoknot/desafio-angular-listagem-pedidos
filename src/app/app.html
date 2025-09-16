@@ -1,15 +1,18 @@
-<div class="container">
-  <h1>Lista de Pedidos</h1>
+<main class="main-container">
+  <h1>Painel de Pedidos</h1>
 
-  <ul class="order-list">
+  <section class="order-grid">
     @for (pedido of pedidos; track pedido.id) {
-    <li class="order-item">
-      <span>ID do Pedido: {{ pedido.id }}</span>
-      <span>Cliente: {{ pedido.client.name }}</span>
-      <span>Data: {{ pedido.date }}</span>
-      <span>Valor: {{ pedido.value }}</span>
-    </li>
+    <mat-card class="order-card">
+      <mat-card-header>
+        <mat-card-title>Pedido #{{ pedido.id }}</mat-card-title>
+        <mat-card-subtitle>{{ pedido.client.name }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Data:</strong> {{ pedido.date }}</p>
+        <p><strong>Valor Total:</strong> R$ {{ pedido.value.toFixed(2) }}</p>
+      </mat-card-content>
+    </mat-card>
     }
-  </ul>
-
-</div>
+  </section>
+</main>
