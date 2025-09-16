@@ -1,8 +1,9 @@
 <main class="main-container">
   <h1>Painel de Pedidos</h1>
+  <app-filtros (filterChange)="applyFilters($event)"></app-filtros>
 
   <section class="order-grid">
-    @for (pedido of pedidos; track pedido.id) {
+    @for (pedido of pedidosFiltrados; track pedido.id) {
     <mat-card class="order-card">
       <mat-card-header>
         <mat-card-title>Pedido #{{ pedido.id }}</mat-card-title>

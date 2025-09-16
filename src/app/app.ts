@@ -7,18 +7,20 @@ import { MatCardModule } from '@angular/material/card';
 import { Pedido } from './models/pedido.model'; // 3. Importe nosso modelo
 import { PedidoService } from './services/pedido'; // 4. Importe nosso serviço
 
+import { FiltrosComponent } from './components/filtros/filtros';
+
 @Component({
   selector: 'app-root',
   standalone: true,
 
-  imports: [RouterOutlet, MatCardModule],
+  imports: [RouterOutlet, MatCardModule, FiltrosComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
 // 6. Faça o componente "implementar" o OnInit
 export class AppComponent implements OnInit {
-  // 7. Crie uma lista vazia para guardar os pedidos
-  public pedidos: Pedido[] = [];
+  private allPedidos: Pedido[] = []; // 1. Lista original, privada.
+  public pedidosFiltrados: Pedido[] = []; // 2. Lista para exibição.
 
   // 8. Injete o PedidoService no construtor
   constructor(private pedidoService: PedidoService) {}
@@ -27,7 +29,27 @@ export class AppComponent implements OnInit {
   // O código aqui dentro roda assim que o componente é iniciado.
   ngOnInit(): void {
     this.pedidoService.getPedidos().subscribe((response) => {
-      this.pedidos = response.pedidos;
+      this.allPedidos = response.pedidos;
+      this.pedidosFiltrados = response.pedidos;
     });
+  }
+
+  // 4. Crie o método que vai receber os filtros do componente filho
+  applyFilters(filters: any): void {
+    let pedidosTemp = [...this.allPedidos]; // Comece com a lista completa
+
+    // Filtro por nome
+    if (filters.nome) {
+      pedidosTemp = pedidosTemp.filter((pedido) =>
+        pedido.client.name.toLowerCase().includes(filters.nome.toLowerCase())
+      );
+    }
+
+    // Filtro por valor
+    if (filters.valor !== null && filters.valor !== undefined) {
+      pedidosTemp = pedidosTemp.filter((pedido) => pedido.value >= filters.valor);
+    }
+
+    this.pedidosFiltrados = pedidosTemp; // Atualize a lista de exibição
   }
 }
