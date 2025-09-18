@@ -3,17 +3,20 @@
 import { Component, OnInit } from '@angular/core'; // 1. Adicione OnInit
 import { RouterOutlet } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 import { Pedido } from './models/pedido.model'; // 3. Importe nosso modelo
 import { PedidoService } from './services/pedido'; // 4. Importe nosso serviço
 
+// Components
 import { FiltrosComponent } from './components/filtros/filtros';
+import { PedidoDetalheComponent } from './components/pedido-detalhe/pedido-detalhe';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-
-  imports: [RouterOutlet, MatCardModule, FiltrosComponent],
+  imports: [RouterOutlet, MatCardModule, FiltrosComponent, MatDialogModule, PedidoDetalheComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
@@ -23,7 +26,7 @@ export class AppComponent implements OnInit {
   public pedidosFiltrados: Pedido[] = []; // 2. Lista para exibição.
 
   // 8. Injete o PedidoService no construtor
-  constructor(private pedidoService: PedidoService) {}
+  constructor(private pedidoService: PedidoService, public dialog: MatDialog) {}
 
   // 9. O ngOnInit é um "gancho de ciclo de vida".
   // O código aqui dentro roda assim que o componente é iniciado.
@@ -51,5 +54,13 @@ export class AppComponent implements OnInit {
     }
 
     this.pedidosFiltrados = pedidosTemp; // Atualize a lista de exibição
+  }
+
+  // 3. Crie o método que abrirá o modal
+  openPedidoModal(pedido: Pedido): void {
+    this.dialog.open(PedidoDetalheComponent, {
+      width: '500px', // Define a largura do modal
+      data: pedido, // 4. Aqui passamos o objeto 'pedido' para o modal!
+    });
   }
 }

@@ -4,7 +4,7 @@
 
   <section class="order-grid">
     @for (pedido of pedidosFiltrados; track pedido.id) {
-    <mat-card class="order-card">
+    <mat-card class="order-card" (click)="openPedidoModal(pedido)">
       <mat-card-header>
         <mat-card-title>Pedido #{{ pedido.id }}</mat-card-title>
         <mat-card-subtitle>{{ pedido.client.name }}</mat-card-subtitle>
