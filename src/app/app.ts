@@ -53,6 +53,20 @@ export class AppComponent implements OnInit {
       pedidosTemp = pedidosTemp.filter((pedido) => pedido.value >= filters.valor);
     }
 
+    // Filtro por data de Inicio
+    if (filters.inicio) {
+      const dataInicio = new Date(filters.inicio);
+      dataInicio.setHours(0, 0, 0, 0);
+      pedidosTemp = pedidosTemp.filter((p) => new Date(p.date) >= dataInicio);
+    }
+
+    // Filtro por data de Fim
+    if (filters.fim) {
+      const dataFim = new Date(filters.fim);
+      dataFim.setHours(23, 59, 59, 999);
+      pedidosTemp = pedidosTemp.filter((p) => new Date(p.date) <= dataFim);
+    }
+
     this.pedidosFiltrados = pedidosTemp; // Atualize a lista de exibição
   }
 
