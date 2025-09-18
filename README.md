@@ -47,7 +47,7 @@ Siga os passos abaixo para executar a aplicação em seu ambiente local.
 
 ```bash
 # 1. Clone o repositório
-git clone [https://github.com/renatoknot/desafio-angular-listagem-pedidos.git](https://github.com/renatoknot/desafio-angular-listagem-pedidos.git)
+git clone https://github.com/renatoknot/desafio-angular-listagem-pedidos.git
 
 # 2. Navegue até a pasta do projeto
 cd desafio-angular-listagem-pedidos
