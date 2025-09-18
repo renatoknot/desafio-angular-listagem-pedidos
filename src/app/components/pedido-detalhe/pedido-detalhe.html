@@ -1,1 +1,28 @@
-<p>pedido-detalhe works!</p>
+<h2 mat-dialog-title>Detalhes do Pedido #{{ data.id }}</h2>
+
+<mat-dialog-content>
+  <h4>Dados do Cliente</h4>
+  <p><strong>Nome:</strong> {{ data.client.name }}</p>
+  <p><strong>Email:</strong> {{ data.client.email }}</p>
+  <p><strong>Telefone:</strong> {{ data.client.phone }}</p>
+
+  <hr />
+
+  <h4>Itens do Pedido</h4>
+  <mat-list role="list">
+    @for (item of data.items; track item.name) {
+    <mat-list-item role="listitem">
+      {{ item.quantity }}x {{ item.name }} - ({{ item.value | currency:'BRL' }})
+    </mat-list-item>
+    }
+  </mat-list>
+
+  <hr />
+
+  <h3><strong>Valor Total: {{ data.value | currency:'BRL' }}</strong></h3>
+  <p><strong>Data do Pedido:</strong> {{ data.date | date:'dd/MM/yyyy HH:mm' }}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close color="primary">Fechar</button>
+</mat-dialog-actions>
