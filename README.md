@@ -1,59 +1,82 @@
-# DesafioFestival
+# Desafio Front-End: Painel de Pedidos do Festival
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.1.
+Este projeto é a solução para um desafio de vaga de front-end, construído com Angular 20 e Angular Material. A aplicação consiste em um painel para visualizar e filtrar pedidos realizados durante um festival.
 
-## Development server
+![Badge Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![Badge TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Badge SCSS](https://img.shields.io/badge/SCSS-CC6699?style=for-the-badge&logo=sass&logoColor=white)
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+### 📋 Índice
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- [Funcionalidades](#-funcionalidades)
+- [Demonstração](#-demonstração)
+- [Como Rodar o Projeto](#-como-rodar-o-projeto)
+- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
+- [Decisões de Arquitetura](#-decisões-de-arquitetura)
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### ✨ Funcionalidades
 
-```bash
-ng generate component component-name
-```
+- **Listagem de Pedidos:** Exibição dos pedidos em cards, com layout responsivo em grade.
+- **Filtros Combinados:** Filtre os pedidos em tempo real por:
+  - Nome do cliente (busca textual).
+  - Valor mínimo do pedido.
+  - Intervalo de datas (início e fim).
+- **Modal de Detalhes:** Ao clicar em um pedido, um modal exibe todas as informações, incluindo os dados do cliente e a lista de itens.
+- **Interface Moderna:** Construída com a suíte de componentes do Angular Material.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+### 🖥️ Demonstração
 
-## Building
+![Screenshot da aplicação](https://raw.githubusercontent.com/renatoknot/desafio-angular-listagem-pedidos/main/Screenshot_53.png)
 
-To build the project run:
+---
 
-```bash
-ng build
-```
+### 🚀 Como Rodar o Projeto
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Siga os passos abaixo para executar a aplicação em seu ambiente local.
 
-## Running unit tests
+**Pré-requisitos:**
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+- [Node.js](https://nodejs.org/en/) (versão 22.x ou superior)
+- [Angular CLI](https://angular.dev/cli) (versão 20.x ou superior)
 
 ```bash
-ng e2e
+# 1. Clone o repositório
+git clone [https://github.com/renatoknot/desafio-angular-listagem-pedidos.git](https://github.com/renatoknot/desafio-angular-listagem-pedidos.git)
+
+# 2. Navegue até a pasta do projeto
+cd desafio-angular-listagem-pedidos
+
+# 3. Instale as dependências
+npm install
+
+# 4. Inicie o servidor de desenvolvimento
+ng serve -o
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+A aplicação estará disponível em `http://localhost:4200/`.
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### 🛠️ Tecnologias Utilizadas
+
+- **Angular 20:** Framework principal para a construção da SPA.
+- **TypeScript:** Superset do JavaScript que adiciona tipagem estática.
+- **Angular Material:** Biblioteca de componentes de UI para uma interface coesa e moderna.
+- **SCSS:** Pré-processador CSS para estilos mais organizados.
+- **RxJS:** Utilizado implicitamente pelo HttpClient do Angular para lidar com a busca de dados assíncrona.
+
+---
+
+### 🏛️ Decisões de Arquitetura
+
+- **Arquitetura Baseada em Componentes:** A aplicação foi modularizada em componentes específicos para cada responsabilidade (`FiltrosComponent`, `PedidoDetalheComponent`), facilitando a manutenção.
+- **Serviços e Injeção de Dependência:** A lógica de busca de dados foi isolada em um `PedidoService`, separando as responsabilidades e tornando o código dos componentes mais limpo.
+- **Tipagem Forte com Interfaces:** Foram criadas interfaces (`Pedido`, `Client`, `Item`) para garantir a integridade e o contrato dos dados em toda a aplicação.
+- **Comunicação entre Componentes:** A comunicação do componente de filtros (filho) para o principal (pai) foi feita utilizando `@Output` e `EventEmitter` para notificar sobre as mudanças nos filtros.
+- **State Management Simples:** Para esta aplicação, foi adotada uma abordagem de gerenciamento de estado local no `AppComponent`, mantendo uma lista original de pedidos e uma lista filtrada para exibição.
